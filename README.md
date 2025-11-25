@@ -21,21 +21,21 @@ AQWorker is a Redis-based background job processing system for Python applicatio
 
 ```
 ┌─────────────┐    get_next_job()    ┌─────────────┐    dequeue()    ┌─────────────┐
-│   Worker    │ ────────────────────► │ JobService  │ ──────────────► │  JobQueue   │
+│   Worker    │ ────────────────────►│ JobService  │ ──────────────► │  JobQueue   │
 │             │                      │             │                 │             │
-│             │ ◄──────────────────── │             │ ◄────────────── │             │
-└─────────────┘    complete_job()    └─────────────┘    complete_job()└─────────────┘
+│             │ ◄────────────────────│             │ ◄────────────── │             │
+└─────────────┘    complete_job()    └─────────────┘   complete_job()└─────────────┘
 
-┌─────────────┐    enqueue_job()     ┌─────────────┐    enqueue()     ┌─────────────┐
-│ Application │ ────────────────────► │   AQWorker  │ ──────────────► │  JobQueue   │
+┌─────────────┐    enqueue_job()     ┌─────────────┐    enqueue()    ┌─────────────┐
+│ Application │ ────────────────────►│   AQWorker  │ ──────────────► │  JobQueue   │
 │ (FastAPI/   │                      │             │                 │             │
 │  Django/    │                      │  - Worker   │                 │             │
 │  Flask/     │                      │    Registry │                 │             │
 │  Script)    │                      │  - Handler  │                 │             │
 │             │                      │    Registry │                 │             │
 └─────────────┘                      │  - Job      │                 └─────────────┘
-                                      │    Service  │
-                                      └─────────────┘
+                                     │    Service  │
+                                     └─────────────┘
 ```
 
 ## Components
