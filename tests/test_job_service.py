@@ -1,5 +1,5 @@
 from collections import defaultdict
-from datetime import UTC, datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 import pytest
 
@@ -191,7 +191,7 @@ async def test_retry_job_respects_budget(job_service):
 @pytest.mark.asyncio
 async def test_cleanup_old_jobs_removes_entries(job_service):
     service, queue = job_service
-    old_time = datetime.now(UTC) - timedelta(days=8)
+    old_time = datetime.now(timezone.utc) - timedelta(days=8)
     completed_job = Job(
         id="completed",
         handler="h",

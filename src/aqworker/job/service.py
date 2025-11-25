@@ -1,5 +1,5 @@
 import uuid
-from datetime import UTC, datetime, timezone
+from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional, Type, Union
 
 from aqworker.constants import get_job_status_key
@@ -231,7 +231,7 @@ class JobService:
             Number of jobs cleaned up
         """
         try:
-            cutoff_date = datetime.now(UTC).timestamp() - (days * 24 * 60 * 60)
+            cutoff_date = datetime.now(timezone.utc).timestamp() - (days * 24 * 60 * 60)
             cleaned_count = 0
 
             # Clean up completed jobs

@@ -1,4 +1,4 @@
-from datetime import UTC, datetime
+from datetime import datetime, timezone
 from enum import Enum
 from functools import partial
 from typing import Any, Dict, Optional
@@ -34,7 +34,8 @@ class Job(BaseModel):
 
     # Timing
     created_at: datetime = Field(
-        default_factory=partial(datetime.now, tz=UTC), description="Job creation time"
+        default_factory=partial(datetime.now, tz=timezone.utc),
+        description="Job creation time",
     )
     updated_at: Optional[datetime] = Field(
         default=None, description="Job last update time"
